@@ -1,5 +1,12 @@
 package oit.is.z0809.kaizi.janken.model;
 
-public class janken {
-  
+public class Janken {
+  String hand;
+  String cpuhand;
+  String result;
+
+  public Janken(String hand, String cpuhand) {
+
+  }
+
 }

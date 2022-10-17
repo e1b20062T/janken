@@ -17,11 +17,11 @@ public class JankenController {
     return "janken.html";
   }
 
-  @GetMapping("/janken")
-  public String jankenpost(@RequestParam String name, ModelMap model) {
-    model.addAttribute("name2", name);
-    return "janken.html";
-  }
+  //@GetMapping("/janken")
+  //public String jankenpost(@RequestParam String name, ModelMap model) {
+  //  model.addAttribute("name2", name);
+  //  return "janken.html";
+  //}
 
 //  @GetMapping("/jankengame")
 //  public String jankengame(@RequestParam String hand, ModelMap model) {

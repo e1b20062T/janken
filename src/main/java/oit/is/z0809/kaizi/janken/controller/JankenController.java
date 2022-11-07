@@ -2,36 +2,41 @@ package oit.is.z0809.kaizi.janken.controller;
 
 import java.security.Principal;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import oit.is.z0809.kaizi.janken.model.Janken;
+import oit.is.z0809.kaizi.janken.model.Entry;
 
 @Controller
-@RequestMapping("/janken")
 public class JankenController {
-  @GetMapping("step1")
-  public String janken() {
+
+  @Autowired
+  private Entry entry;
+  @GetMapping("/janken")
+  public String janken_get(ModelMap model, Principal prin) {
+    String loginUser = prin.getName();
+    this.entry.addUser(loginUser);
+    model.addAttribute("entry", this.entry);
     return "janken.html";
   }
 
-  // @GetMapping("/janken")
-  // public String jankenpost(@RequestParam String name, ModelMap model) {
-  // model.addAttribute("name2", name);
-  // return "janken.html";
-  // }
+  @PostMapping("/janken")
+  public String jankenpost(@RequestParam String name, ModelMap model) {
+    model.addAttribute("Username", name);
+    return "janken.html";
+  }
 
-  // @GetMapping("/jankengame")
-  // public String jankengame(@RequestParam String hand, ModelMap model) {
-  // String yourhand = hand;
-  // String cpuhand = "Gu";
-  // Janken janken = new Janken(yourhand, cpuhand);
-  // model.addAttribute("yourhand", yourhand);
-
-  //return "janken.html";
-  // }
+  @GetMapping("/jankengame")
+  public String jankengame(@RequestParam String hand, ModelMap model) {
+    Janken janken = new Janken(hand);
+    model.addAttribute("jaknen", janken);
+    model.addAttribute("entry", this.entry);
+    return "janken.html";
+  }
 
 }

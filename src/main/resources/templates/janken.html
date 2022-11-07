@@ -1,21 +1,39 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
-
-</html>
-
-<html lang="ja">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>Janken Game!</title>
+  <meta charset="utf-8">
+  <title>Janken GAME!</title>
 </head>
 
 <body>
   <a href="/logout">ログアウト</a>
-  <h1>Authorized! [[${login_user}]]</h1>
 
+  <h1>Janken GAME!</h1>
 
-  <a href="/sample24">グー</a> <a href="/sample24">チョキ</a> <a href="/sample24">パー</a>
+  <div th:if="${entry}">
+    エントリー
+    <ul>
+      <li>今[[${entry.count}]]人がエントリーしています</li>
+      <li th:each="user : ${entry.users}">[[${user}]]</li>
+    </ul>
+  </div>
+
+  <div>
+    Hi <span sec:authentication="name" />
+  </div>
+
+  <p>
+    <a href="/jankengame?hand=Gu">ぐー</a>
+    <a href="/jankengame?hand=Tyoki">ちょき</a>
+    <a href="/jankengame?hand=Pa">ぱー</a>
+  </p>
+  
+  <div th:if="${Janken}">
+    <div>あなたの手 [[${Janken.gethand()}]]</div>
+    <div>相手の手 [[${Janken.getcpuhand()}]]</div>
+    <div>結果 [[${Janken.battle()}]]</div>
+  </div>
 </body>
 
 </html>
